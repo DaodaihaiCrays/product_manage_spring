@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.example.store_spring.util.InvalidException;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductService {
@@ -39,14 +40,14 @@ public class ProductService {
 
     public Product updateAProducts(ProductUpdateRequestDTO productReq) throws InvalidException  {
 
-        Product product = productRepository.findByName(productReq.getName());
+        Optional<Product> product = productRepository.findById(productReq.getId());
 
         if (product == null) {
             throw new InvalidException("Product not found");
         }
 
-        modelMapper.map(productReq, product);
+        modelMapper.map(productReq, product.get());
 
-        return productRepository.save(product);
+        return productRepository.save(product.get());
     }
 }

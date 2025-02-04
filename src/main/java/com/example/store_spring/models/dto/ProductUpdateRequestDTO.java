@@ -2,9 +2,13 @@ package com.example.store_spring.models.dto;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 public class ProductUpdateRequestDTO {
+
+    @NotNull(message = "The id is required")
+    private int id;
 
     @NotEmpty(message = "The name is required")
     private String name;
@@ -27,13 +31,22 @@ public class ProductUpdateRequestDTO {
     @Override
     public String toString() {
         return "ProductUpdateRequestDTO{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", brand='" + brand + '\'' +
                 ", category='" + category + '\'' +
                 ", price=" + price +
                 ", description='" + description + '\'' +
                 ", imageFileName='" + imageFileName + '\'' +
                 '}';
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
